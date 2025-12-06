@@ -171,9 +171,13 @@ def main():
     while playing:
         game.play_round()
         print()
-        again = input("Play again? y/n: ").lower()
-        if again != 'y':
+        if game.player.money > 0:
+            again = input("Play again? y/n: ").lower()
+            if again != 'y':
+                playing = False
+        else:
             playing = False
+            print('Game over: you ran out of money.')
 
 if __name__ == "__main__":
     main()
