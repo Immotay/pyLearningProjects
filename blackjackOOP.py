@@ -121,7 +121,7 @@ class Game:
         elif player_status == 'blackjack' and dealer_status is None:
             print('You win with natural Blackjack')
             self.player.money += bet * 2.5
-            print(f'You gained ${bet * 2} ({bet} + {1.5 * bet} reward)')
+            print(f'You gained ${bet * 2.5} ({bet} + {1.5 * bet} reward)')
         elif player_status is None and dealer_status == 'blackjack':
             print("You lose due to dealer's natural Blackjack")
         else:
@@ -153,4 +153,5 @@ def main():
             playing = False
 
 if __name__ == "__main__":
+
     main()
