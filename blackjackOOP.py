@@ -85,16 +85,39 @@ class Game:
         print(f'You have: {self.player.show()}')
 
         # player turn
+
+        first_action = True
+
         while True:
             if self.player.value () >= 21:
                 break
 
-            choice = input('Hit or stay? h/s: ').lower()
+            choice = input('Hit, stay or double down? h/s/d: ').lower()
             if choice == 's':
+                break
+
+            elif choice == 'd':
+                if self.player.money < bet:
+                    print("You don't have enough money to double down.")
+                    continue
+
+                if not first_action:
+                    print("You can only double down on your first action.")
+                    continue
+                
+                # deduzindo dobra
+                self.player.money -= bet
+                bet *= 2
+
+                # um hit forçado
+                self.player.hit()
+                print(f"You have: {self.player.show()}")
                 break
 
             self.player.hit()
             print(f"You have: {self.player.show()}")
+
+            first_action = False
 
         if self.player.value() > 21:
             print("You bust! Dealer wins.")
@@ -153,5 +176,4 @@ def main():
             playing = False
 
 if __name__ == "__main__":
-
     main()
